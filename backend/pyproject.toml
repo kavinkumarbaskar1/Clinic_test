@@ -1,0 +1,22 @@
+[project]
+name = "clinic-booking-backend"
+version = "0.1.0"
+description = "FastAPI service for the clinic booking app."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.121.0",
+    "pydantic-settings>=2.6.0",
+    "uvicorn[standard]>=0.32.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+]
+
+[tool.ruff]
+line-length = 79
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

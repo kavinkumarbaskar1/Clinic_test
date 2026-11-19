@@ -1,0 +1,8 @@
+{
+  "name": "clinic-booking-app",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "lint": "npm --prefix frontend run lint --"
+  }
+}
