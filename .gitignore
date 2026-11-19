@@ -1,0 +1,7 @@
+backend/.ruff_cache/
+backend/.venv/
+backend/*.egg-info/
+frontend/dist/
+frontend/node_modules/
+__pycache__/
+*.py[cod]
