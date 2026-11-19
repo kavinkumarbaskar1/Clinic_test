@@ -23,12 +23,16 @@ const personas = [
 ];
 
 const mainContentId = 'main-content';
+const defaultApiHealth = {
+  message: 'Clinic API connection has not been checked.',
+  status: 'unknown',
+};
 
 function getInitialPersona(pathname) {
   return getRouteByPath(pathname).persona;
 }
 
-function AppShell() {
+function AppShell({ apiHealth = defaultApiHealth }) {
   const [pathname, setPathname] = useState(window.location.pathname);
   const [persona, setPersona] = useState(getInitialPersona(window.location.pathname));
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -103,7 +107,7 @@ function AppShell() {
         >
           <Notice title="Prototype shell">
             Navigation, theme, and shared surfaces are ready for the booking,
-            rescheduling, and daily schedule workflows.
+            rescheduling, and daily schedule workflows. {apiHealth.message}
           </Notice>
           <Card className="route-card">
             <div className="route-card__header">
