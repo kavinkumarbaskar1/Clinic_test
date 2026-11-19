@@ -7,21 +7,31 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import api_router
+from app.config import get_settings
 from app.persistence.database import initialize_database
-from app.settings import get_settings
 
 
 @asynccontextmanager
 async def lifespan(_application: FastAPI) -> AsyncIterator[None]:
     """Initialize application resources."""
-    initialize_database()
+    settings = get_settings()
+    initialize_database(settings.database_path)
     yield
 
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
     settings = get_settings()
-    application = FastAPI(title=settings.app_name, lifespan=lifespan)
+    docs_url = "/docs" if settings.show_api_docs else None
+    redoc_url = "/redoc" if settings.show_api_docs else None
+    openapi_url = "/openapi.json" if settings.show_api_docs else None
+    application = FastAPI(
+        title=settings.app_name,
+        lifespan=lifespan,
+        docs_url=docs_url,
+        redoc_url=redoc_url,
+        openapi_url=openapi_url,
+    )
 
     application.add_middleware(
         CORSMiddleware,
